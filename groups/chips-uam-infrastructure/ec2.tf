@@ -1,0 +1,98 @@
+# ------------------------------------------------------------------------------
+# CHIPS UAM EC2 Security Group and rules
+# ------------------------------------------------------------------------------
+module "chips_uam_ec2_security_group" {
+  source  = "terraform-aws-modules/security-group/aws"
+  version = "~> 3.0"
+
+  name        = "sgr-${var.application}-ec2-001"
+  description = "Security group for the ${var.application} ec2"
+  vpc_id      = data.aws_vpc.vpc.id
+
+  computed_ingress_with_source_security_group_id = [
+    {
+      rule                     = "http-80-tcp"
+      source_security_group_id = module.chips_uam_external_alb_security_group.this_security_group_id
+    }
+  ]
+  number_of_computed_ingress_with_source_security_group_id = 1
+
+  egress_rules = ["all-all"]
+
+  tags = merge(
+    local.default_tags,
+    map(
+      "ServiceTeam", "${upper(var.application)}-Support"
+    )
+  )
+}
+
+
+resource "aws_cloudwatch_log_group" "chips_uam" {
+  name              = "logs-${var.application}"
+  retention_in_days = var.log_group_retention_in_days
+  kms_key_id        = local.logs_kms_key_id
+
+
+  tags = merge(
+    local.default_tags,
+    map(
+      "ServiceTeam", "${upper(var.application)}-Support"
+    )
+  )
+}
+
+# ------------------------------------------------------------------------------
+# CHIPS UAM EC2
+# ------------------------------------------------------------------------------
+module "chips_uam_ec2" {
+  source  = "terraform-aws-modules/ec2-instance/aws"
+  version = "2.19.0"
+
+  name = var.ec2_name
+
+  ami           = data.aws_ami.chips_uam.id
+  key_name      = aws_key_pair.ec2_keypair.key_name
+  instance_type = var.ec2_size
+  subnet_id     = coalesce(data.aws_subnet_ids.application.ids...)
+  vpc_security_group_ids = [
+    module.chips_uam_ec2_security_group.this_security_group_id,
+    data.aws_security_group.nagios_shared.id
+  ]
+  iam_instance_profile = module.chips_uam_profile.aws_iam_instance_profile.name
+  user_data_base64     = data.template_cloudinit_config.chips_uam_userdata_config.rendered
+
+  root_block_device = [
+    {
+      volume_size = "100"
+      volume_type = "gp2"
+      encrypted   = true
+      kms_key_id  = data.aws_kms_key.ebs.arn
+    }
+  ]
+
+  tags = merge(
+    local.default_tags,
+    map(
+      "Name", var.application,
+      "ServiceTeam", "${upper(var.application)}-Support"
+    )
+  )
+}
+
+resource "aws_key_pair" "ec2_keypair" {
+  key_name   = format("%s-%s", var.application, "ec2")
+  public_key = local.chips_uam_ec2_data["public-key"]
+}
+
+resource "aws_lb_target_group_attachment" "ec2_alb_assoc" {
+  target_group_arn = module.chips_uam_external_alb.target_group_arns[0]
+  #target_id       = module.chips_uam_ec2.id
+  target_id = element(module.chips_uam_ec2.id, 0)
+  #target_id        = module.chips_uam_ec2.id
+  port = 80
+
+  depends_on = [
+    module.chips_uam_external_alb
+  ]
+}
