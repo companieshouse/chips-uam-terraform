@@ -52,9 +52,20 @@ variable "application" {
   description = "The name of the application"
 }
 
+variable "dns_prefix" {
+  type        = string
+  description = "The DNS prefix"
+}
+
 variable "environment" {
   type        = string
   description = "The name of the environment"
+}
+
+variable "ServiceTeam" {
+  type        = string
+  description = "The service team that supports the Cognos application"
+  default     = "CSI"
 }
 
 # ------------------------------------------------------------------------------
@@ -65,12 +76,6 @@ variable "domain_name" {
   type        = string
   default     = "*.companieshouse.gov.uk"
   description = "Domain Name for ACM Certificate"
-}
-
-variable "public_allow_cidr_blocks" {
-  type        = list(any)
-  default     = ["0.0.0.0/0"]
-  description = "cidr block for allowing inbound users from internet"
 }
 
 variable "fe_service_port" {

@@ -3,6 +3,7 @@
 # Locals
 # ------------------------------------------------------------------------
 locals {
+  admin_cidrs        = values(data.vault_generic_secret.internal_cidrs.data)
   chips_uam_ec2_data = data.vault_generic_secret.chips_uam_ec2_data.data
 
   kms_keys_data          = data.vault_generic_secret.kms_keys.data
@@ -15,6 +16,8 @@ locals {
 
   elb_access_logs_bucket_name = local.security_s3_data["elb-access-logs-bucket-name"]
   elb_access_logs_prefix      = "elb-access-logs"
+
+  internal_fqdn = format("%s.%s.aws.internal", split("-", var.aws_account)[1], split("-", var.aws_account)[0])
 
   default_tags = {
     Terraform   = "true"

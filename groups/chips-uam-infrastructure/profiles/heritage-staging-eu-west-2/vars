@@ -9,6 +9,7 @@ region  = "euw2"
 
 # Application details
 application = "chips-uam"
+dns_prefix  = "uam"
 environment = "staging"
 
 # Instance detail

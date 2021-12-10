@@ -13,4 +13,18 @@ module "chips_uam_profile" {
     local.ssm_kms_key_id
   ]
   s3_buckets_write = [local.session_manager_bucket_name]
+  custom_statements = [
+    {
+      sid    = "AllowAccessToReleaseBucket",
+      effect = "Allow",
+      resources = [
+        "arn:aws:s3:::development-eu-west-2.release.ch.gov.uk/chips/*",
+        "arn:aws:s3:::development-eu-west-2.release.ch.gov.uk/chips"
+      ],
+      actions = [
+        "s3:Get*",
+        "s3:List*",
+      ]
+    }
+  ]
 }

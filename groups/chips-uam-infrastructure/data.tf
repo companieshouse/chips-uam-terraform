@@ -7,11 +7,11 @@ data "aws_vpc" "vpc" {
   }
 }
 
-data "aws_subnet_ids" "public" {
+data "aws_subnet_ids" "web" {
   vpc_id = data.aws_vpc.vpc.id
   filter {
     name   = "tag:Name"
-    values = ["sub-public-*"]
+    values = ["sub-web-*"]
   }
 }
 
@@ -93,4 +93,13 @@ data "template_cloudinit_config" "chips_uam_userdata_config" {
     content_type = "text/x-shellscript"
     content      = data.template_file.chips_uam_userdata.rendered
   }
+}
+
+data "aws_route53_zone" "private_zone" {
+  name         = local.internal_fqdn
+  private_zone = true
+}
+
+data "vault_generic_secret" "internal_cidrs" {
+  path = "aws-accounts/network/internal_cidr_ranges"
 }

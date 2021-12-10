@@ -12,7 +12,7 @@ module "chips_uam_ec2_security_group" {
   computed_ingress_with_source_security_group_id = [
     {
       rule                     = "http-80-tcp"
-      source_security_group_id = module.chips_uam_external_alb_security_group.this_security_group_id
+      source_security_group_id = module.chips_uam_internal_alb_security_group.this_security_group_id
     }
   ]
   number_of_computed_ingress_with_source_security_group_id = 1
@@ -22,7 +22,7 @@ module "chips_uam_ec2_security_group" {
   tags = merge(
     local.default_tags,
     map(
-      "ServiceTeam", "${upper(var.application)}-Support"
+      "ServiceTeam", var.ServiceTeam
     )
   )
 }
@@ -37,7 +37,7 @@ resource "aws_cloudwatch_log_group" "chips_uam" {
   tags = merge(
     local.default_tags,
     map(
-      "ServiceTeam", "${upper(var.application)}-Support"
+      "ServiceTeam", var.ServiceTeam
     )
   )
 }
@@ -75,7 +75,19 @@ module "chips_uam_ec2" {
     local.default_tags,
     map(
       "Name", var.application,
-      "ServiceTeam", "${upper(var.application)}-Support"
+      "ServiceTeam", var.ServiceTeam,
+      "Backup", "true",
+      "BackupApp", var.application
+    )
+  )
+
+  volume_tags = merge(
+    local.default_tags,
+    map(
+      "Name", var.application,
+      "ServiceTeam", var.ServiceTeam,
+      "Backup", "true",
+      "BackupApp", var.application
     )
   )
 }
@@ -86,11 +98,11 @@ resource "aws_key_pair" "ec2_keypair" {
 }
 
 resource "aws_lb_target_group_attachment" "ec2_alb_assoc" {
-  target_group_arn = module.chips_uam_external_alb.target_group_arns[0]
+  target_group_arn = module.chips_uam_internal_alb.target_group_arns[0]
   target_id        = element(module.chips_uam_ec2.id, 0)
   port             = 80
 
   depends_on = [
-    module.chips_uam_external_alb
+    module.chips_uam_internal_alb
   ]
 }
