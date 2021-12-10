@@ -18,8 +18,8 @@ module "chips_uam_profile" {
       sid    = "AllowAccessToReleaseBucket",
       effect = "Allow",
       resources = [
-        "arn:aws:s3:::development-eu-west-2.release.ch.gov.uk/chips/*",
-        "arn:aws:s3:::development-eu-west-2.release.ch.gov.uk/chips"
+        "arn:aws:s3:::development-eu-west-2.release.ch.gov.uk/*",
+        "arn:aws:s3:::development-eu-west-2.release.ch.gov.uk"
       ],
       actions = [
         "s3:Get*",
