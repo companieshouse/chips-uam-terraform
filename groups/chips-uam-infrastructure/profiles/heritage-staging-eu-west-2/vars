@@ -1,0 +1,17 @@
+# Account details
+aws_profile = "heritage-staging-eu-west-2"
+aws_region  = "eu-west-2"
+aws_account = "heritage-staging"
+
+# shorthand
+account = "hstg"
+region  = "euw2"
+
+# Application details
+application = "chips-uam"
+dns_prefix  = "uam"
+environment = "staging"
+
+# Instance detail
+ec2_name  = "chips-uam"
+ec2_size  = "m5.2xlarge"
