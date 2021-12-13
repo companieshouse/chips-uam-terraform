@@ -11,7 +11,7 @@ module "chips_uam_ec2_security_group" {
 
   computed_ingress_with_source_security_group_id = [
     {
-      rule                     = "http-80-tcp"
+      rule                     = "http-8080-tcp"
       source_security_group_id = module.chips_uam_internal_alb_security_group.this_security_group_id
     }
   ]
