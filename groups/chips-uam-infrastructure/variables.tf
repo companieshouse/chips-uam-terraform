@@ -80,7 +80,7 @@ variable "domain_name" {
 
 variable "fe_service_port" {
   type        = number
-  default     = 80
+  default     = 8080
   description = "Target group backend port"
 }
 
