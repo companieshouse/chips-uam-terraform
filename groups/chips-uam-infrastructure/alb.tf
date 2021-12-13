@@ -10,7 +10,7 @@ module "chips_uam_internal_alb_security_group" {
   vpc_id      = data.aws_vpc.vpc.id
 
   ingress_cidr_blocks = local.admin_cidrs
-  ingress_rules       = ["http-80-tcp", "https-443-tcp", "http-8080-tcp"]
+  ingress_rules       = ["http-80-tcp", "https-443-tcp"]
 
   egress_rules = ["all-all"]
 }
