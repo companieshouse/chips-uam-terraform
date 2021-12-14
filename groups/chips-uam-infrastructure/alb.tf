@@ -96,7 +96,6 @@ module "chips_uam_internal_alb" {
 #--------------------------------------------
 # ALB CloudWatch Merics
 #--------------------------------------------
-/*
 module "internal_alb_proxy_metrics" {
   source = "git@github.com:companieshouse/terraform-modules//aws/alb-metrics?ref=tags/1.0.26"
 
@@ -105,4 +104,3 @@ module "internal_alb_proxy_metrics" {
 
   depends_on = [module.chips_uam_internal_alb]
 }
-*/
