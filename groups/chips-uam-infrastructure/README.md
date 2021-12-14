@@ -26,6 +26,7 @@
 | <a name="module_chips_uam_internal_alb"></a> [chips\_uam\_internal\_alb](#module\_chips\_uam\_internal\_alb) | terraform-aws-modules/alb/aws | ~> 5.0 |
 | <a name="module_chips_uam_internal_alb_security_group"></a> [chips\_uam\_internal\_alb\_security\_group](#module\_chips\_uam\_internal\_alb\_security\_group) | terraform-aws-modules/security-group/aws | ~> 3.0 |
 | <a name="module_chips_uam_profile"></a> [chips\_uam\_profile](#module\_chips\_uam\_profile) | git@github.com:companieshouse/terraform-modules//aws/instance_profile?ref=tags/1.0.59 |  |
+| <a name="module_internal_alb_proxy_metrics"></a> [internal\_alb\_proxy\_metrics](#module\_internal\_alb\_proxy\_metrics) | git@github.com:companieshouse/terraform-modules//aws/alb-metrics?ref=tags/1.0.26 |  |
 
 ## Resources
 
