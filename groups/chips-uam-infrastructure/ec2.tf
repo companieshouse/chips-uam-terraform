@@ -100,7 +100,7 @@ resource "aws_key_pair" "ec2_keypair" {
 resource "aws_lb_target_group_attachment" "ec2_alb_assoc" {
   target_group_arn = module.chips_uam_internal_alb.target_group_arns[0]
   target_id        = element(module.chips_uam_ec2.id, 0)
-  port             = 80
+  port             = 8080
 
   depends_on = [
     module.chips_uam_internal_alb
