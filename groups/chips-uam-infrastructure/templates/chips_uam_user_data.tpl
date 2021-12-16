@@ -14,11 +14,13 @@ yum -y install Xvfb
 
 #UAM GUI
 mkdir -p /home/ec2-user/uam
+cd /home/ec2-user/uam/
 aws s3 cp s3://shared-services.eu-west-2.resources.ch.gov.uk/chips/uam/uam_gui-1.109.0-rc1.zip /home/ec2-user/uam
-unzip /home/ec2-user/uam/uam_gui-1.109.0-rc1.zip
+unzip /home/ec2-user/uam/uam_gui-1.109.0-rc1.zip /home/ec2-user/uam
 rm -rf /home/ec2-user/uam/uam_gui-1.109.0-rc1.zip
 
 #Webswing
+cd /home/ec2-user/
 aws s3 cp s3://shared-services.eu-west-2.resources.ch.gov.uk/chips/uam/webswing-2.5.5-distribution.zip /home/ec2-user/
 unzip /home/ec2-user/webswing-2.5.5-distribution.zip
 rm -rf /home/ec2-user/webswing-2.5.5-distribution.zip
