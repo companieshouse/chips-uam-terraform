@@ -5,6 +5,12 @@
 locals {
   admin_cidrs        = values(data.vault_generic_secret.internal_cidrs.data)
   chips_uam_ec2_data = data.vault_generic_secret.chips_uam_ec2_data.data
+  chips_uam_data     = data.vault_generic_secret.chips_uam_data.data
+
+  #For each log map passed, add an extra kv for the log group name
+  chips_uam_logs = { for log, map in var.chips_uam_logs : log => merge(map, { "log_group_name" = "${var.application}-${log}" }) }
+
+  chips_uam_log_groups = compact([for log, map in local.chips_uam_logs : lookup(map, "log_group_name", "")])
 
   kms_keys_data          = data.vault_generic_secret.kms_keys.data
   security_kms_keys_data = data.vault_generic_secret.security_kms_keys.data

@@ -1,6 +1,8 @@
 # ------------------------------------------------------------------------------
 # Data
 # ------------------------------------------------------------------------------
+data "aws_caller_identity" "current" {}
+
 data "aws_vpc" "vpc" {
   tags = {
     Name = "vpc-${var.aws_account}"
@@ -77,11 +79,17 @@ data "aws_ami" "chips_uam" {
   }
 }
 
+data "vault_generic_secret" "chips_uam_data" {
+  path = "applications/${var.aws_account}-${var.aws_region}/chips/uam/master/"
+}
+
 data "template_file" "chips_uam_userdata" {
   template = file("${path.module}/templates/chips_uam_user_data.tpl")
 
   vars = {
-    REGION = var.aws_region
+    REGION               = var.aws_region
+    HERITAGE_ENVIRONMENT = title(var.environment)
+    CHIPS_UAM_INPUTS     = local.chips_uam_data["master-txt"]
   }
 }
 
