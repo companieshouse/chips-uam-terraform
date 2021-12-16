@@ -20,46 +20,46 @@ ec2_size  = "m5.2xlarge"
 chips_uam_logs = {
   "audit.log" = {
     file_path = "/var/log/audit"
-    log_group_retention = 30
+    log_group_retention = 365
   }
 
   "messages" = {
     file_path = "/var/log"
-    log_group_retention = 30
+    log_group_retention = 365
   }
 
   "secure" = {
     file_path = "/var/log"
-    log_group_retention = 30
+    log_group_retention = 365
   }
 
   "yum.log" = {
     file_path = "/var/log"
-    log_group_retention = 30
+    log_group_retention = 365
   }
 
   "errors.log" = {
     file_path = "/var/log/amazon/ssm"
-    log_group_retention = 30
+    log_group_retention = 365
   }
 
   "amazon-ssm-agent.log" = {
     file_path = "/var/log/amazon/ssm"
-    log_group_retention = 30
+    log_group_retention = 365
   }
 
   "audit.log" = {
     file_path = "/home/ec2-user/webswing-2.5.5-distribution"
-    log_group_retention = 30
+    log_group_retention = 365
   }
 
   "stats.log" = {
     file_path = "/home/ec2-user/webswing-2.5.5-distribution"
-    log_group_retention = 30
+    log_group_retention = 365
   }
 
   "webswing.out" = {
     file_path = "/home/ec2-user/webswing-2.5.5-distribution"
-    log_group_retention = 30
+    log_group_retention = 365
   }
 }
