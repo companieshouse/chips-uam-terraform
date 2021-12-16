@@ -4,10 +4,19 @@ module "chips_uam_profile" {
 
   name       = "chips_uam_profile"
   enable_SSM = true
-  cw_log_group_arns = [
-    "${aws_cloudwatch_log_group.chips_uam.arn}:*",
-    "${aws_cloudwatch_log_group.chips_uam.arn}:*:*",
-  ]
+  cw_log_group_arns = length(local.fe_log_groups) > 0 ? flatten([
+    formatlist(
+      "arn:aws:logs:%s:%s:log-group:%s:*:*",
+      var.aws_region,
+      data.aws_caller_identity.current.account_id,
+      local.fe_log_groups
+    ),
+    formatlist("arn:aws:logs:%s:%s:log-group:%s:*",
+      var.aws_region,
+      data.aws_caller_identity.current.account_id,
+      local.fe_log_groups
+    ),
+  ]) : null
   kms_key_refs = [
     "alias/${var.account}/${var.region}/ebs",
     local.ssm_kms_key_id

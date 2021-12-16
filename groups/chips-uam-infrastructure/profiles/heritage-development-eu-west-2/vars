@@ -15,3 +15,51 @@ environment = "development"
 # Instance detail
 ec2_name  = "chips-uam"
 ec2_size  = "m5.2xlarge"
+
+#Cloudwatch log groups
+chips_uam_logs = {
+  "audit.log" = {
+    file_path = "/var/log/audit"
+    log_group_retention = 30
+  }
+
+  "messages" = {
+    file_path = "/var/log"
+    log_group_retention = 30
+  }
+
+  "secure" = {
+    file_path = "/var/log"
+    log_group_retention = 30
+  }
+
+  "yum.log" = {
+    file_path = "/var/log"
+    log_group_retention = 30
+  }
+
+  "errors.log" = {
+    file_path = "/var/log/amazon/ssm"
+    log_group_retention = 30
+  }
+
+  "amazon-ssm-agent.log" = {
+    file_path = "/var/log/amazon/ssm"
+    log_group_retention = 30
+  }
+
+  "audit.log" = {
+    file_path = "/home/ec2-user/webswing-2.5.5-distribution"
+    log_group_retention = 30
+  }
+
+  "stats.log" = {
+    file_path = "/home/ec2-user/webswing-2.5.5-distribution"
+    log_group_retention = 30
+  }
+
+  "webswing.out" = {
+    file_path = "/home/ec2-user/webswing-2.5.5-distribution"
+    log_group_retention = 30
+  }
+}

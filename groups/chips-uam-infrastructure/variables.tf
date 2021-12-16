@@ -115,3 +115,9 @@ variable "ami_name" {
   default     = "amzn2-base-*"
   description = "Name of the AMI to use in the Auto Scaling configuration for email servers"
 }
+
+variable "chips_uam_logs" {
+  type        = map(any)
+  description = "Map of log file information; used to create log groups, IAM permissions and passed to the application to configure remote logging"
+  default     = {}
+}
