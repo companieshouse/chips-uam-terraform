@@ -3,8 +3,8 @@
 exec > >(tee /var/log/user-data.log|logger -t user-data -s 2>/dev/console) 2>&1
 
 #Update Nagios registration script with relevant template
-sed 's/linux-server/CHIPS_UAM_${HERITAGE_ENVIRONMENT}' /usr/local/bin/nagios-host-add.sh
-sed 's/API_KEY="";/API_KEY="${API_KEY}";' /usr/local/bin/nagios-host-add.sh
+#sed 's/linux-server/CHIPS_UAM_${HERITAGE_ENVIRONMENT}' /usr/local/bin/nagios-host-add.sh
+#sed 's/API_KEY="";/API_KEY="${API_KEY}";' /usr/local/bin/nagios-host-add.sh
 
 #Install Java OpenJDK version 8
 yum -y install java-1.8.0-openjdk
