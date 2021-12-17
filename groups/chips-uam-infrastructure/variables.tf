@@ -68,6 +68,11 @@ variable "ServiceTeam" {
   default     = "CSI"
 }
 
+variable "nagios_api_key" {
+  type        = string
+  description = "Nagios API Key"
+}
+
 # ------------------------------------------------------------------------------
 # CHIPS UAM Frontend Variables - ALB 
 # ------------------------------------------------------------------------------
