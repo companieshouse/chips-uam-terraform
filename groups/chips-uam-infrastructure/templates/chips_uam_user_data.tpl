@@ -13,7 +13,7 @@ yum -y install java-1.8.0-openjdk
 yum -y install Xvfb
 
 #UAM GUI
-cd /home/ec2-user/
+pushd /home/ec2-user/
 aws s3 cp s3://shared-services.eu-west-2.resources.ch.gov.uk/chips/uam/uam_gui-1.109.0-rc1.zip /home/ec2-user/
 unzip /home/ec2-user/uam_gui-1.109.0-rc1.zip
 rm -rf /home/ec2-user/uam_gui-1.109.0-rc1.zip
@@ -32,8 +32,9 @@ EOF
 chmod 700 /home/ec2-user/uam_gui-1.109.0-rc1/master.txt
 
 #Encrypt master.txt
-cd /home/ec2-user/uam_gui-1.109.0-rc1/
+pushd /home/ec2-user/uam_gui-1.109.0-rc1/
 /home/ec2-user/uam_gui-1.109.0-rc1/encryptUamDbConfigFile.sh master.txt
+rm -rf /home/ec2-user/uam_gui-1.109.0-rc1/master.txt
 
 #Create a systemd script that will control the startup of webswing including automated restarts for reboots
 aws s3 cp s3://shared-services.eu-west-2.resources.ch.gov.uk/chips/uam/webswing.service /etc/systemd/system/
