@@ -17,6 +17,7 @@ pushd /home/ec2-user/
 aws s3 cp s3://shared-services.eu-west-2.resources.ch.gov.uk/chips/uam/uam_gui-1.109.0-rc1.zip /home/ec2-user/
 unzip /home/ec2-user/uam_gui-1.109.0-rc1.zip
 rm -rf /home/ec2-user/uam_gui-1.109.0-rc1.zip
+mv /home/ec2-user/uam_gui-1.109.0-rc1 /home/ec2-user/uam
 
 #Webswing
 aws s3 cp s3://shared-services.eu-west-2.resources.ch.gov.uk/chips/uam/webswing-2.5.5-distribution.zip /home/ec2-user/
@@ -25,16 +26,16 @@ rm -rf /home/ec2-user/webswing-2.5.5-distribution.zip
 
 #Copy master.txt from vault to /home/ec2-user/uam
 #Create key:value variable
-cat <<EOF >> /home/ec2-user/uam_gui-1.109.0-rc1/master.txt
+cat <<EOF >> /home/ec2-user/uam/master.txt
 ${CHIPS_UAM_INPUTS}
 EOF
 
-chmod 700 /home/ec2-user/uam_gui-1.109.0-rc1/master.txt
+chmod 700 /home/ec2-user/uam/master.txt
 
 #Encrypt master.txt
-pushd /home/ec2-user/uam_gui-1.109.0-rc1/
-/home/ec2-user/uam_gui-1.109.0-rc1/encryptUamDbConfigFile.sh master.txt
-rm -rf /home/ec2-user/uam_gui-1.109.0-rc1/master.txt
+pushd /home/ec2-user/uam/
+/home/ec2-user/uam/encryptUamDbConfigFile.sh master.txt
+rm -rf /home/ec2-user/uam/master.txt
 
 #Create a systemd script that will control the startup of webswing including automated restarts for reboots
 aws s3 cp s3://shared-services.eu-west-2.resources.ch.gov.uk/chips/uam/webswing.service /etc/systemd/system/
