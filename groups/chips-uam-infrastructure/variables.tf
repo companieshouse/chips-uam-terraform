@@ -99,9 +99,9 @@ variable "fe_health_check_path" {
 # EC2 Variables
 # ------------------------------------------------------------------------------
 
-variable "log_group_retention_in_days" {
+variable "default_log_group_retention_in_days" {
   type        = number
-  default     = 7
+  default     = 365
   description = "Total days to retain logs in CloudWatch log group"
 }
 
