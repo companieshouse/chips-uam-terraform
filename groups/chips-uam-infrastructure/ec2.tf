@@ -29,9 +29,11 @@ module "chips_uam_ec2_security_group" {
 
 
 resource "aws_cloudwatch_log_group" "chips_uam" {
-  name              = "logs-${var.application}"
-  retention_in_days = var.log_group_retention_in_days
-  kms_key_id        = local.logs_kms_key_id
+  for_each = local.chips_uam_logs
+
+  name              = each.value["log_group_name"]
+  retention_in_days = lookup(each.value, "log_group_retention", var.default_log_group_retention_in_days)
+  kms_key_id        = lookup(each.value, "kms_key_id", data.aws_kms_key.logs.arn)
 
 
   tags = merge(
