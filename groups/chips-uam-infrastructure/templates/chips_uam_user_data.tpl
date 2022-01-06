@@ -6,6 +6,10 @@ exec > >(tee /var/log/user-data.log|logger -t user-data -s 2>/dev/console) 2>&1
 #sed 's/linux-server/CHIPS_UAM_${HERITAGE_ENVIRONMENT}' /usr/local/bin/nagios-host-add.sh
 #sed 's/API_KEY="";/API_KEY="${API_KEY}";' /usr/local/bin/nagios-host-add.sh
 
+#Run Ansible playbook for server setup using provided inputs
+echo '${ANSIBLE_INPUTS}' > /root/ansible_inputs.json
+/usr/local/bin/ansible-playbook /root/deployment.yml -e '@/root/ansible_inputs.json'
+
 #Install Java OpenJDK version 8
 yum -y install java-1.8.0-openjdk
 
