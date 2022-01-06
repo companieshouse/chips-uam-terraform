@@ -24,6 +24,11 @@ locals {
 
   internal_fqdn = format("%s.%s.aws.internal", split("-", var.aws_account)[1], split("-", var.aws_account)[0])
 
+  chips_uam_ansible_inputs = {
+    cw_log_files  = local.chips_uam_logs
+    cw_agent_user = "root"
+  }
+
   default_tags = {
     Terraform   = "true"
     Application = upper(var.application)
