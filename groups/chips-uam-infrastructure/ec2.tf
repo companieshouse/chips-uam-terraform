@@ -78,7 +78,7 @@ module "chips_uam_ec2" {
     map(
       "Name", var.application,
       "ServiceTeam", var.ServiceTeam,
-      "Backup", "true",
+      "Backup", "backup21",
       "BackupApp", var.application
     )
   )
@@ -88,7 +88,7 @@ module "chips_uam_ec2" {
     map(
       "Name", var.application,
       "ServiceTeam", var.ServiceTeam,
-      "Backup", "true",
+      "Backup", "backup21",
       "BackupApp", var.application
     )
   )
