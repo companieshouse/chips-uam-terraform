@@ -15,7 +15,7 @@ environment = "live"
 # Instance detail
 ec2_name       = "chips-uam"
 ec2_size       = "m5.2xlarge"
-retention_days = "backup11"
+retention_days = "backup21"
 
 #Cloudwatch log groups
 chips_uam_logs = {
