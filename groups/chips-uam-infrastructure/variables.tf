@@ -126,3 +126,8 @@ variable "chips_uam_logs" {
   description = "Map of log file information; used to create log groups, IAM permissions and passed to the application to configure remote logging"
   default     = {}
 }
+
+variable "retention_days" {
+  type        = string
+  description = "The number of retention days after which backups will be deleted"
+}
