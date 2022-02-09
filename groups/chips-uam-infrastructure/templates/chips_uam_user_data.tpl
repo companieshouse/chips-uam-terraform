@@ -43,4 +43,4 @@ systemctl enable webswing.service
 systemctl start webswing.service
 
 #Cron job to restart webswing service every Monday at 22:00
-00 22 * * 1 systemctl restart webswing > /root/webswing_service_status
+echo "00 22 * * 1 systemctl restart webswing" | tee -a /var/spool/cron/root
