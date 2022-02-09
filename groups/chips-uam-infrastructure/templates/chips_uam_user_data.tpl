@@ -41,3 +41,8 @@ rm -rf /home/ec2-user/uam/master.txt
 aws s3 cp s3://shared-services.eu-west-2.resources.ch.gov.uk/chips/uam/webswing.service /etc/systemd/system/
 systemctl enable webswing.service
 systemctl start webswing.service
+
+#Cron job to restart webswing service every Monday at 22:00
+echo '#### CHIPS UAM restart job ####' > /root/cronfile
+echo '00 22 * * 1 systemctl restart webswing' >> /root/cronfile
+crontab -u root /root/cronfile

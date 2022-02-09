@@ -78,6 +78,7 @@
 | <a name="input_fe_service_port"></a> [fe\_service\_port](#input\_fe\_service\_port) | Target group backend port | `number` | `8080` | no |
 | <a name="input_nagios_api_key"></a> [nagios\_api\_key](#input\_nagios\_api\_key) | Nagios API Key | `string` | n/a | yes |
 | <a name="input_region"></a> [region](#input\_region) | Short version of the name of the AWS region in which resources will be administered | `string` | n/a | yes |
+| <a name="input_retention_days"></a> [retention\_days](#input\_retention\_days) | The number of retention days after which backups will be deleted | `string` | n/a | yes |
 | <a name="input_vault_password"></a> [vault\_password](#input\_vault\_password) | Password for connecting to Vault - usually supplied through TF\_VARS | `string` | n/a | yes |
 | <a name="input_vault_username"></a> [vault\_username](#input\_vault\_username) | Username for connecting to Vault - usually supplied through TF\_VARS | `string` | n/a | yes |
 

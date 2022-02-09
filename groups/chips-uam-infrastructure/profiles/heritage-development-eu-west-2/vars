@@ -13,8 +13,9 @@ dns_prefix  = "uam"
 environment = "development"
 
 # Instance detail
-ec2_name  = "chips-uam"
-ec2_size  = "m5.2xlarge"
+ec2_name       = "chips-uam"
+ec2_size       = "m5.2xlarge"
+retention_days = "true"
 
 #Cloudwatch log groups
 chips_uam_logs = {
