@@ -97,10 +97,21 @@ module "chips_uam_internal_alb" {
 # ALB CloudWatch Merics
 #--------------------------------------------
 module "internal_alb_proxy_metrics" {
-  source = "git@github.com:companieshouse/terraform-modules//aws/alb-metrics?ref=tags/1.0.26"
+  source = "git@github.com:companieshouse/terraform-modules//aws/alb-cloudwatch-alarms?ref=tags/1.0.116"
 
-  load_balancer_id = module.chips_uam_internal_alb.this_lb_id
-  target_group_ids = module.chips_uam_internal_alb.target_group_arns
+  alb_arn_suffix            = module.chips_uam_internal_alb.this_lb_arn_suffix
+  target_group_arn_suffixes = module.chips_uam_internal_alb.target_group_arn_suffixes
+
+  prefix                    = "chips-uam-alb-"
+  response_time_threshold   = "100"
+  evaluation_periods        = "3"
+  statistic_period          = "60"
+  maximum_4xx_threshold     = "2"
+  maximum_5xx_threshold     = "2"
+  unhealthy_hosts_threshold = "1"
+
+  actions_alarm = []
+  actions_ok    = []
 
   depends_on = [module.chips_uam_internal_alb]
 }
