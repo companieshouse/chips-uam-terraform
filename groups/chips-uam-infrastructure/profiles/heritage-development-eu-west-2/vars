@@ -14,7 +14,7 @@ environment = "development"
 
 # Instance detail
 ec2_name       = "chips-uam"
-ec2_size       = "m5.2xlarge"
+ec2_size       = "t3.large"
 retention_days = "true"
 
 #Cloudwatch log groups

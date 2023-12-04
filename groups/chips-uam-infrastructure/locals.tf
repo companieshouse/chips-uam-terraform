@@ -13,6 +13,7 @@ locals {
   chips_uam_log_groups = compact([for log, map in local.chips_uam_logs : lookup(map, "log_group_name", "")])
 
   kms_keys_data          = data.vault_generic_secret.kms_keys.data
+  account_ssm_key_arn    = local.kms_keys_data["ssm"]
   security_kms_keys_data = data.vault_generic_secret.security_kms_keys.data
   ssm_kms_key_id         = local.security_kms_keys_data["session-manager-kms-key-arn"]
 
@@ -27,6 +28,10 @@ locals {
   chips_uam_ansible_inputs = {
     cw_log_files  = local.chips_uam_logs
     cw_agent_user = "root"
+  }
+
+  parameter_store_secrets = {
+    master_data = local.chips_uam_data["master-txt"]
   }
 
   default_tags = {
