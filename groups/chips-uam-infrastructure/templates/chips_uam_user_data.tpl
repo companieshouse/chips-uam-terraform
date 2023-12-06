@@ -24,11 +24,8 @@ aws s3 cp s3://shared-services.eu-west-2.resources.ch.gov.uk/chips/uam/webswing-
 unzip /home/ec2-user/webswing-2.5.5-distribution.zip
 rm -rf /home/ec2-user/webswing-2.5.5-distribution.zip
 
-#Copy master.txt from vault to /home/ec2-user/uam
-#Create key:value variable
-cat <<EOF >> /home/ec2-user/uam/master.txt
-${CHIPS_UAM_INPUTS}
-EOF
+#Retrieve master.txt from parameter store
+aws ssm get-parameter --with-decryption --region ${REGION} --output text --query 'Parameter.Value' --name '${MASTER_DATA_PATH}' > /home/ec2-user/uam/master.txt
 
 chmod 700 /home/ec2-user/uam/master.txt
 

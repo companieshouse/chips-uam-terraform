@@ -19,7 +19,8 @@ module "chips_uam_profile" {
   ]) : null
   kms_key_refs = [
     "alias/${var.account}/${var.region}/ebs",
-    local.ssm_kms_key_id
+    local.ssm_kms_key_id,
+    local.account_ssm_key_arn
   ]
   s3_buckets_write = [local.session_manager_bucket_name]
   custom_statements = [
@@ -33,6 +34,14 @@ module "chips_uam_profile" {
       actions = [
         "s3:Get*",
         "s3:List*",
+      ]
+    },
+    {
+      sid       = "AllowReadOfParameterStore",
+      effect    = "Allow",
+      resources = ["arn:aws:ssm:${var.aws_region}:${data.aws_caller_identity.current.account_id}:parameter/${var.application}/${var.environment}/*"],
+      actions = [
+        "ssm:GetParameter*"
       ]
     }
   ]

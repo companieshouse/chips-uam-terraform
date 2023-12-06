@@ -95,7 +95,7 @@ data "template_file" "chips_uam_userdata" {
     ANSIBLE_INPUTS       = jsonencode(local.chips_uam_ansible_inputs)
     HERITAGE_ENVIRONMENT = title(var.environment)
     API_KEY              = var.nagios_api_key
-    CHIPS_UAM_INPUTS     = local.chips_uam_data["master-txt"]
+    MASTER_DATA_PATH     = "/${var.application}/${var.environment}/master_data"
   }
 }
 
