@@ -83,6 +83,13 @@ module "chips_uam_ec2" {
     )
   )
 
+  metadata_options = { 
+    http_endpoint               = "enabled"
+    http_tokens                 = "required"
+    instance_metadata_tags      = "enabled"
+    http_put_response_hop_limit = 1
+  }
+
   volume_tags = merge(
     local.default_tags,
     map(
