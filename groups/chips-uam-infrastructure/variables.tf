@@ -112,8 +112,7 @@ variable "ec2_size" {
 
 variable "ami_name" {
   type        = string
-  #default     = "amzn2-base-*"
-  default = "amzn2-base-0.2.34"
+  default     = "amzn2-base-*"
   description = "Name of the AMI to use in the Auto Scaling configuration for email servers"
 }
 
