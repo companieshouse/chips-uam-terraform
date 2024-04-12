@@ -67,7 +67,7 @@ module "chips_uam_ec2" {
   root_block_device = [
     {
       volume_size = "100"
-      volume_type = "gp2"
+      volume_type = "gp3"
       encrypted   = true
       kms_key_id  = data.aws_kms_key.ebs.arn
     }
@@ -82,6 +82,13 @@ module "chips_uam_ec2" {
       "BackupApp", var.application
     )
   )
+
+  metadata_options = { 
+    http_endpoint               = "enabled"
+    http_tokens                 = "required"
+    instance_metadata_tags      = "enabled"
+    http_put_response_hop_limit = 1
+  }
 
   volume_tags = merge(
     local.default_tags,

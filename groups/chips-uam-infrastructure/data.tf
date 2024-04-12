@@ -93,8 +93,6 @@ data "template_file" "chips_uam_userdata" {
   vars = {
     REGION               = var.aws_region
     ANSIBLE_INPUTS       = jsonencode(local.chips_uam_ansible_inputs)
-    HERITAGE_ENVIRONMENT = title(var.environment)
-    API_KEY              = var.nagios_api_key
     MASTER_DATA_PATH     = "/${var.application}/${var.environment}/master_data"
   }
 }
