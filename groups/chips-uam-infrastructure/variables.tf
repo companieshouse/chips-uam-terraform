@@ -126,3 +126,8 @@ variable "retention_days" {
   type        = string
   description = "The number of retention days after which backups will be deleted"
 }
+
+variable "uam_gui_version" {
+  type        = string
+  description = "The version of the uam_gui release package to download during server startup - e.g. 1.0.0"
+}
