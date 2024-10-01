@@ -94,6 +94,7 @@ data "template_file" "chips_uam_userdata" {
     REGION               = var.aws_region
     ANSIBLE_INPUTS       = jsonencode(local.chips_uam_ansible_inputs)
     MASTER_DATA_PATH     = "/${var.application}/${var.environment}/master_data"
+    UAM_GUI_VERSION      = var.uam_gui_version
   }
 }
 

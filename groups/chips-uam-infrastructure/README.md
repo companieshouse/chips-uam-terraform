@@ -1,6 +1,4 @@
-# chips-uam-infrastructure-terraform
-
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
@@ -25,17 +23,19 @@
 | <a name="module_chips_uam_ec2_security_group"></a> [chips\_uam\_ec2\_security\_group](#module\_chips\_uam\_ec2\_security\_group) | terraform-aws-modules/security-group/aws | ~> 3.0 |
 | <a name="module_chips_uam_internal_alb"></a> [chips\_uam\_internal\_alb](#module\_chips\_uam\_internal\_alb) | terraform-aws-modules/alb/aws | ~> 5.0 |
 | <a name="module_chips_uam_internal_alb_security_group"></a> [chips\_uam\_internal\_alb\_security\_group](#module\_chips\_uam\_internal\_alb\_security\_group) | terraform-aws-modules/security-group/aws | ~> 3.0 |
-| <a name="module_chips_uam_profile"></a> [chips\_uam\_profile](#module\_chips\_uam\_profile) | git@github.com:companieshouse/terraform-modules//aws/instance_profile?ref=tags/1.0.59 |  |
-| <a name="module_internal_alb_proxy_metrics"></a> [internal\_alb\_proxy\_metrics](#module\_internal\_alb\_proxy\_metrics) | git@github.com:companieshouse/terraform-modules//aws/alb-metrics?ref=tags/1.0.26 |  |
+| <a name="module_chips_uam_profile"></a> [chips\_uam\_profile](#module\_chips\_uam\_profile) | git@github.com:companieshouse/terraform-modules//aws/instance_profile | tags/1.0.59 |
+| <a name="module_internal_alb_proxy_metrics"></a> [internal\_alb\_proxy\_metrics](#module\_internal\_alb\_proxy\_metrics) | git@github.com:companieshouse/terraform-modules//aws/alb-cloudwatch-alarms | tags/1.0.116 |
 
 ## Resources
 
 | Name | Type |
 |------|------|
 | [aws_cloudwatch_log_group.chips_uam](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group) | resource |
+| [aws_iam_role_policy_attachment.inspector_cis_scanning_policy_attach](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_key_pair.ec2_keypair](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/key_pair) | resource |
 | [aws_lb_target_group_attachment.ec2_alb_assoc](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group_attachment) | resource |
 | [aws_route53_record.chips_uam_alb_internal](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record) | resource |
+| [aws_ssm_parameter.parameters](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ssm_parameter) | resource |
 | [aws_acm_certificate.acm_cert](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/acm_certificate) | data source |
 | [aws_ami.chips_uam](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ami) | data source |
 | [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
@@ -76,9 +76,9 @@
 | <a name="input_environment"></a> [environment](#input\_environment) | The name of the environment | `string` | n/a | yes |
 | <a name="input_fe_health_check_path"></a> [fe\_health\_check\_path](#input\_fe\_health\_check\_path) | Target group health check path | `string` | `"/"` | no |
 | <a name="input_fe_service_port"></a> [fe\_service\_port](#input\_fe\_service\_port) | Target group backend port | `number` | `8080` | no |
-| <a name="input_nagios_api_key"></a> [nagios\_api\_key](#input\_nagios\_api\_key) | Nagios API Key | `string` | n/a | yes |
 | <a name="input_region"></a> [region](#input\_region) | Short version of the name of the AWS region in which resources will be administered | `string` | n/a | yes |
 | <a name="input_retention_days"></a> [retention\_days](#input\_retention\_days) | The number of retention days after which backups will be deleted | `string` | n/a | yes |
+| <a name="input_uam_gui_version"></a> [uam\_gui\_version](#input\_uam\_gui\_version) | The version of the uam\_gui release package to download during server startup - e.g. 1.0.0 | `string` | n/a | yes |
 | <a name="input_vault_password"></a> [vault\_password](#input\_vault\_password) | Password for connecting to Vault - usually supplied through TF\_VARS | `string` | n/a | yes |
 | <a name="input_vault_username"></a> [vault\_username](#input\_vault\_username) | Username for connecting to Vault - usually supplied through TF\_VARS | `string` | n/a | yes |
 
@@ -87,4 +87,4 @@
 | Name | Description |
 |------|-------------|
 | <a name="output_chips_uam_frontend_address_internal"></a> [chips\_uam\_frontend\_address\_internal](#output\_chips\_uam\_frontend\_address\_internal) | n/a |
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- END_TF_DOCS -->
