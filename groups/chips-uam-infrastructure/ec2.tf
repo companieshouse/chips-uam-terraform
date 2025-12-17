@@ -12,7 +12,7 @@ module "chips_uam_ec2_security_group" {
   computed_ingress_with_source_security_group_id = [
     {
       rule                     = "http-8080-tcp"
-      source_security_group_id = module.chips_uam_internal_alb_security_group.this_security_group_id
+      source_security_group_id = module.chips_uam_internal_alb_security_group.security_group_id
     }
   ]
   number_of_computed_ingress_with_source_security_group_id = 1
@@ -21,9 +21,9 @@ module "chips_uam_ec2_security_group" {
 
   tags = merge(
     local.default_tags,
-    map(
-      "ServiceTeam", var.ServiceTeam
-    )
+    {
+      ServiceTeam = var.ServiceTeam
+    }
   )
 }
 
@@ -38,9 +38,9 @@ resource "aws_cloudwatch_log_group" "chips_uam" {
 
   tags = merge(
     local.default_tags,
-    map(
-      "ServiceTeam", var.ServiceTeam
-    )
+    {
+      ServiceTeam = var.ServiceTeam
+    }
   )
 }
 
@@ -56,7 +56,7 @@ module "chips_uam_ec2" {
   ami           = data.aws_ami.chips_uam.id
   key_name      = aws_key_pair.ec2_keypair.key_name
   instance_type = var.ec2_size
-  subnet_id     = coalesce(data.aws_subnet_ids.application.ids...)
+  subnet_id     = coalesce(data.aws_subnets.application.ids...)
   vpc_security_group_ids = [
     module.chips_uam_ec2_security_group.this_security_group_id,
     data.aws_security_group.nagios_shared.id
@@ -75,15 +75,15 @@ module "chips_uam_ec2" {
 
   tags = merge(
     local.default_tags,
-    map(
-      "Name", var.application,
-      "ServiceTeam", var.ServiceTeam,
-      "Backup", var.retention_days,
-      "BackupApp", var.application
-    )
+    {
+      Name        = var.application
+      ServiceTeam = var.ServiceTeam
+      Backup      = var.retention_days
+      BackupApp   = var.application
+    }
   )
 
-  metadata_options = { 
+  metadata_options = {
     http_endpoint               = "enabled"
     http_tokens                 = "required"
     instance_metadata_tags      = "enabled"
@@ -92,12 +92,12 @@ module "chips_uam_ec2" {
 
   volume_tags = merge(
     local.default_tags,
-    map(
-      "Name", var.application,
-      "ServiceTeam", var.ServiceTeam,
-      "Backup", var.retention_days,
-      "BackupApp", var.application
-    )
+    {
+      Name        = var.application
+      ServiceTeam = var.ServiceTeam
+      Backup      = var.retention_days
+      BackupApp   = var.application
+    }
   )
 }
 

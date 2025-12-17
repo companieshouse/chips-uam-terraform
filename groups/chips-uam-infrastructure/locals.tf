@@ -41,5 +41,6 @@ locals {
     Account     = var.aws_account
     Repository  = "chips-uam-terraform"
     Service     = "CHIPS"
+    Environment = var.environment
   }
 }
