@@ -17,8 +17,8 @@ module "chips_uam_internal_alb_security_group" {
   tags = merge(
     local.default_tags,
     {
-      Name        = "sgr-${var.application}-alb-001"
-      ServiceTeam = "${upper(var.application)}-FE-Support"
+      Name        = "sgr-${var.application}-internal-alb-001"
+      ServiceTeam = var.ServiceTeam
     }
   )
 }
