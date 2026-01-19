@@ -19,7 +19,7 @@
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_chips_uam_ec2"></a> [chips\_uam\_ec2](#module\_chips\_uam\_ec2) | terraform-aws-modules/ec2-instance/aws | 5.8.0 |
+| <a name="module_chips_uam_ec2"></a> [chips\_uam\_ec2](#module\_chips\_uam\_ec2) | terraform-aws-modules/ec2-instance/aws | ~> 5.0 |
 | <a name="module_chips_uam_ec2_security_group"></a> [chips\_uam\_ec2\_security\_group](#module\_chips\_uam\_ec2\_security\_group) | terraform-aws-modules/security-group/aws | ~> 5.0 |
 | <a name="module_chips_uam_internal_alb"></a> [chips\_uam\_internal\_alb](#module\_chips\_uam\_internal\_alb) | terraform-aws-modules/alb/aws | ~> 5.0 |
 | <a name="module_chips_uam_internal_alb_security_group"></a> [chips\_uam\_internal\_alb\_security\_group](#module\_chips\_uam\_internal\_alb\_security\_group) | terraform-aws-modules/security-group/aws | ~> 5.0 |

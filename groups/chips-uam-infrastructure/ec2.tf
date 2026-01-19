@@ -39,7 +39,7 @@ resource "aws_cloudwatch_log_group" "chips_uam" {
 # ------------------------------------------------------------------------------
 module "chips_uam_ec2" {
   source  = "terraform-aws-modules/ec2-instance/aws"
-  version = "5.8.0"
+  version = "~> 5.0"
   name = var.ec2_name
   ami           = data.aws_ami.chips_uam.id
   key_name      = aws_key_pair.ec2_keypair.key_name
