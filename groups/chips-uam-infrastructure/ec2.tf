@@ -50,7 +50,7 @@ module "chips_uam_ec2" {
     data.aws_security_group.nagios_shared.id
   ]
   iam_instance_profile = module.chips_uam_profile.aws_iam_instance_profile.name
-  user_data_base64     = data.template_cloudinit_config.chips_uam_userdata_config.rendered
+  user_data_base64     = data.cloudinit_config.chips_uam_userdata_config.rendered
   root_block_device = [
     {
       volume_size = "100"

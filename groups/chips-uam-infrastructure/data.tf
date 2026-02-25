@@ -104,7 +104,7 @@ data "template_file" "chips_uam_userdata" {
   }
 }
 
-data "template_cloudinit_config" "chips_uam_userdata_config" {
+data "cloudinit_config" "chips_uam_userdata_config" {
   gzip          = true
   base64_encode = true
 
