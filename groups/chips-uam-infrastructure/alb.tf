@@ -123,3 +123,4 @@ module "internal_alb_proxy_metrics" {
 
   depends_on = [module.chips_uam_internal_alb]
 }
+

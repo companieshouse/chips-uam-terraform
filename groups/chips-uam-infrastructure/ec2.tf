@@ -96,3 +96,4 @@ resource "aws_lb_target_group_attachment" "ec2_alb_assoc" {
     module.chips_uam_internal_alb
   ]
 }
+

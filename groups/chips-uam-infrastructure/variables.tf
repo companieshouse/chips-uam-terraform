@@ -118,3 +118,4 @@ variable "uam_gui_version" {
   type        = string
   description = "The version of the uam_gui release package to download during server startup - e.g. 1.0.0"
 }
+
