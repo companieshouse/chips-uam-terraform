@@ -13,7 +13,7 @@
 | Name | Version |
 |------|---------|
 | <a name="provider_aws"></a> [aws](#provider\_aws) | 5.100.0 |
-| <a name="provider_cloudinit"></a> [cloudinit](#provider\_cloudinit) | >= 2.0, < 3.0 |
+| <a name="provider_cloudinit"></a> [cloudinit](#provider\_cloudinit) | 2.3.7 |
 | <a name="provider_template"></a> [template](#provider\_template) | 2.2.0 |
 | <a name="provider_vault"></a> [vault](#provider\_vault) | 4.8.0 |
 
@@ -21,10 +21,10 @@
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_chips_uam_ec2"></a> [chips\_uam\_ec2](#module\_chips\_uam\_ec2) | terraform-aws-modules/ec2-instance/aws | ~> 5.0 |
-| <a name="module_chips_uam_ec2_security_group"></a> [chips\_uam\_ec2\_security\_group](#module\_chips\_uam\_ec2\_security\_group) | terraform-aws-modules/security-group/aws | ~> 5.0 |
-| <a name="module_chips_uam_internal_alb"></a> [chips\_uam\_internal\_alb](#module\_chips\_uam\_internal\_alb) | terraform-aws-modules/alb/aws | ~> 5.0 |
-| <a name="module_chips_uam_internal_alb_security_group"></a> [chips\_uam\_internal\_alb\_security\_group](#module\_chips\_uam\_internal\_alb\_security\_group) | terraform-aws-modules/security-group/aws | ~> 5.0 |
+| <a name="module_chips_uam_ec2"></a> [chips\_uam\_ec2](#module\_chips\_uam\_ec2) | terraform-aws-modules/ec2-instance/aws | 5.8.0 |
+| <a name="module_chips_uam_ec2_security_group"></a> [chips\_uam\_ec2\_security\_group](#module\_chips\_uam\_ec2\_security\_group) | terraform-aws-modules/security-group/aws | 5.3.1 |
+| <a name="module_chips_uam_internal_alb"></a> [chips\_uam\_internal\_alb](#module\_chips\_uam\_internal\_alb) | terraform-aws-modules/alb/aws | 6.7.0 |
+| <a name="module_chips_uam_internal_alb_security_group"></a> [chips\_uam\_internal\_alb\_security\_group](#module\_chips\_uam\_internal\_alb\_security\_group) | terraform-aws-modules/security-group/aws | 5.3.1 |
 | <a name="module_chips_uam_profile"></a> [chips\_uam\_profile](#module\_chips\_uam\_profile) | git@github.com:companieshouse/terraform-modules//aws/instance_profile | tags/1.0.363 |
 | <a name="module_internal_alb_proxy_metrics"></a> [internal\_alb\_proxy\_metrics](#module\_internal\_alb\_proxy\_metrics) | git@github.com:companieshouse/terraform-modules//aws/alb-cloudwatch-alarms | tags/1.0.363 |
 

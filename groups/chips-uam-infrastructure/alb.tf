@@ -3,7 +3,7 @@
 # ------------------------------------------------------------------------------
 module "chips_uam_internal_alb_security_group" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "~> 5.0"
+  version = "5.3.1"
 
   name        = "sgr-${var.application}-internal-alb-001"
   description = "Security group for ${var.application}"
@@ -28,7 +28,7 @@ module "chips_uam_internal_alb_security_group" {
 #--------------------------------------------
 module "chips_uam_internal_alb" {
   source  = "terraform-aws-modules/alb/aws"
-  version = "~> 5.0"
+  version = "6.7.0"
 
   name                       = "alb-${var.application}-internal-001"
   vpc_id                     = data.aws_vpc.vpc.id
