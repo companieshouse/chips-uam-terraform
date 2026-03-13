@@ -22,6 +22,7 @@ module "chips_uam_ec2_security_group" {
     }
   )
 }
+
 resource "aws_cloudwatch_log_group" "chips_uam" {
   for_each          = local.chips_uam_logs
   name              = each.value["log_group_name"]
@@ -34,6 +35,7 @@ resource "aws_cloudwatch_log_group" "chips_uam" {
     }
   )
 }
+
 # ------------------------------------------------------------------------------
 # CHIPS UAM EC2
 # ------------------------------------------------------------------------------
@@ -84,10 +86,12 @@ module "chips_uam_ec2" {
     }
   )
 }
+
 resource "aws_key_pair" "ec2_keypair" {
   key_name   = format("%s-%s", var.application, "ec2")
   public_key = local.chips_uam_ec2_data["public-key"]
 }
+
 resource "aws_lb_target_group_attachment" "ec2_alb_assoc" {
   target_group_arn = module.chips_uam_internal_alb.target_group_arns[0]
   target_id        = module.chips_uam_ec2.id
