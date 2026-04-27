@@ -107,7 +107,7 @@ module "chips_uam_internal_alb" {
 module "internal_alb_proxy_metrics" {
   source = "git@github.com:companieshouse/terraform-modules//aws/alb-cloudwatch-alarms?ref=tags/1.0.363"
 
-  alb_arn_suffix            = module.chips_uam_internal_alb.this_lb_arn_suffix
+  alb_arn_suffix            = module.chips_uam_internal_alb.lb_arn_suffix
   target_group_arn_suffixes = module.chips_uam_internal_alb.target_group_arn_suffixes
 
   prefix                    = "chips-uam-alb-"
