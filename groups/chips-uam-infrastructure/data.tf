@@ -9,16 +9,22 @@ data "aws_vpc" "vpc" {
   }
 }
 
-data "aws_subnet_ids" "web" {
-  vpc_id = data.aws_vpc.vpc.id
+data "aws_subnets" "web" {
+  filter {
+    name   = "vpc-id"
+    values = [data.aws_vpc.vpc.id]
+  }
   filter {
     name   = "tag:Name"
     values = ["sub-web-*"]
   }
 }
 
-data "aws_subnet_ids" "application" {
-  vpc_id = data.aws_vpc.vpc.id
+data "aws_subnets" "application" {
+  filter {
+    name   = "vpc-id"
+    values = [data.aws_vpc.vpc.id]
+  }
   filter {
     name   = "tag:Name"
     values = ["sub-application-*"]
@@ -91,14 +97,14 @@ data "template_file" "chips_uam_userdata" {
   template = file("${path.module}/templates/chips_uam_user_data.tpl")
 
   vars = {
-    REGION               = var.aws_region
-    ANSIBLE_INPUTS       = jsonencode(local.chips_uam_ansible_inputs)
-    MASTER_DATA_PATH     = "/${var.application}/${var.environment}/master_data"
-    UAM_GUI_VERSION      = var.uam_gui_version
+    REGION           = var.aws_region
+    ANSIBLE_INPUTS   = jsonencode(local.chips_uam_ansible_inputs)
+    MASTER_DATA_PATH = "/${var.application}/${var.environment}/master_data"
+    UAM_GUI_VERSION  = var.uam_gui_version
   }
 }
 
-data "template_cloudinit_config" "chips_uam_userdata_config" {
+data "cloudinit_config" "chips_uam_userdata_config" {
   gzip          = true
   base64_encode = true
 
@@ -116,3 +122,4 @@ data "aws_route53_zone" "private_zone" {
 data "vault_generic_secret" "internal_cidrs" {
   path = "aws-accounts/network/internal_cidr_ranges"
 }
+

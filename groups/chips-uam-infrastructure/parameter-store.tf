@@ -11,3 +11,4 @@ resource "aws_ssm_parameter" "parameters" {
     Application = var.application
   }
 }
+

@@ -1,9 +1,9 @@
 
 module "chips_uam_profile" {
-  source = "git@github.com:companieshouse/terraform-modules//aws/instance_profile?ref=tags/1.0.59"
+  source = "git@github.com:companieshouse/terraform-modules//aws/instance_profile?ref=tags/1.0.363"
 
   name       = "chips_uam_profile"
-  enable_SSM = true
+  enable_ssm = true
   cw_log_group_arns = length(local.chips_uam_log_groups) > 0 ? flatten([
     formatlist(
       "arn:aws:logs:%s:%s:log-group:%s:*:*",
@@ -53,3 +53,4 @@ resource "aws_iam_role_policy_attachment" "inspector_cis_scanning_policy_attach"
   policy_arn = "arn:aws:iam::aws:policy/AmazonInspector2ManagedCisPolicy"
   role       = module.chips_uam_profile.aws_iam_role.name
 }
+

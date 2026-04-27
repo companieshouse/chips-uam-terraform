@@ -3,7 +3,7 @@
 # ------------------------------------------------------------------------------
 module "chips_uam_internal_alb_security_group" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "~> 3.0"
+  version = "5.3.1"
 
   name        = "sgr-${var.application}-internal-alb-001"
   description = "Security group for ${var.application}"
@@ -13,6 +13,14 @@ module "chips_uam_internal_alb_security_group" {
   ingress_rules       = ["http-80-tcp", "https-443-tcp"]
 
   egress_rules = ["all-all"]
+
+  tags = merge(
+    local.default_tags,
+    {
+      Name        = "sgr-${var.application}-internal-alb-001"
+      ServiceTeam = var.ServiceTeam
+    }
+  )
 }
 
 #--------------------------------------------
@@ -20,7 +28,7 @@ module "chips_uam_internal_alb_security_group" {
 #--------------------------------------------
 module "chips_uam_internal_alb" {
   source  = "terraform-aws-modules/alb/aws"
-  version = "~> 5.0"
+  version = "6.7.0"
 
   name                       = "alb-${var.application}-internal-001"
   vpc_id                     = data.aws_vpc.vpc.id
@@ -28,8 +36,8 @@ module "chips_uam_internal_alb" {
   load_balancer_type         = "application"
   enable_deletion_protection = true
 
-  security_groups = [module.chips_uam_internal_alb_security_group.this_security_group_id]
-  subnets         = data.aws_subnet_ids.web.ids
+  security_groups = [module.chips_uam_internal_alb_security_group.security_group_id]
+  subnets         = data.aws_subnets.web.ids
 
   access_logs = {
     bucket  = local.elb_access_logs_bucket_name
@@ -86,9 +94,9 @@ module "chips_uam_internal_alb" {
 
   tags = merge(
     local.default_tags,
-    map(
-      "ServiceTeam", var.ServiceTeam
-    )
+    {
+      ServiceTeam = var.ServiceTeam
+    }
   )
 }
 
@@ -97,7 +105,7 @@ module "chips_uam_internal_alb" {
 # ALB CloudWatch Merics
 #--------------------------------------------
 module "internal_alb_proxy_metrics" {
-  source = "git@github.com:companieshouse/terraform-modules//aws/alb-cloudwatch-alarms?ref=tags/1.0.116"
+  source = "git@github.com:companieshouse/terraform-modules//aws/alb-cloudwatch-alarms?ref=tags/1.0.363"
 
   alb_arn_suffix            = module.chips_uam_internal_alb.this_lb_arn_suffix
   target_group_arn_suffixes = module.chips_uam_internal_alb.target_group_arn_suffixes
@@ -115,3 +123,4 @@ module "internal_alb_proxy_metrics" {
 
   depends_on = [module.chips_uam_internal_alb]
 }
+
